@@ -1,0 +1,50 @@
+<div id="navModal" class="mod">
+    <div class="modal-header">
+        <h4>Login</h4>
+        <span id="nav-close" class="closeModal">&times;</span>
+    </div>
+    <form>
+        <div class="modal-body">
+            <div class="modal-field">
+                
+                <input class="modal-text-input" name="username" id="username" placeholder="Username">
+            </div>
+            
+            <div class="modal-field">
+                
+                <input class="modal-text-input" name="password" id="password" placeholder="Password" type="password">
+            </div>
+   
+            <div class="modal-footer">
+                <input type="submit" value="Submit" id="submitLogin">
+                <div class="social-media-bar-login">
+                    <a class="social-media-container" id="facebookBtn" href="users/auth/facebook"><img src="assets/images/social_media_icons/facebook-icon-preview.png"></a>
+                
+                
+                    <a class="social-media-container" id="googleBtn" href="users/auth/google"><img src="assets/images/social_media_icons/google-favicon-logo.png"></a>
+            
+                    <a class="social-media-container" id="twitterBtn" href="users/auth/twitter"><img src="assets/images/social_media_icons/twitter-icon-circle--blue--logo-preview.png" ></a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    
+</div>
+
+
+<div id='successModal' class="mod modal">
+    <div class="modal-header">
+        <h4 id='success-header'>Success</h4>
+        <span id="upload-close" class="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+        <p id='success-message'>The operation was carried out successfully</p>
+    </div>
+    <div class="modal-footer-success">
+        <button value="OK" class='okModal'>OK</button>
+    </div>
+</div>
+
+<img id='imgDisplay' src="assets\images\62616718_p0_master1200.jpg" class="mod">
+<%- include("./overlays.ejs") %>

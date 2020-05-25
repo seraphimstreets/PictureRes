@@ -1,0 +1,93 @@
+.profileSidebarCont{
+    background:white;
+    width:100%;
+    z-index:5;
+    border:1px solid rgba(0,0,0,0.2);
+    border-radius:12px 0 12px 12px;
+}
+
+.profileSidebar{
+    width:100%;
+    height:100%;
+    padding-left:5%;
+    padding-right:5%;
+    padding-bottom:10%;
+}
+
+.profileSidebarHeader{
+  
+    
+    padding: 2vh 0;
+    display:flex;
+  
+    flex-direction:column;
+    border-bottom: 1px solid rgba(0,0,0,0.2)
+}
+
+.profileSidebarBody{
+    width:100%;
+}
+
+.profileSidebarItems{
+    width:100%;
+    list-style: none;
+}
+
+
+
+.profileSidebarItem{
+    display:flex;
+    align-items: center;
+  
+    padding:2vh 5%;
+    list-style:none;
+  
+    
+}
+
+.profileSidebarItem a {
+    color:black;
+}
+
+
+.profileSidebarAvatarCont img{
+    display:block;
+    
+    width:100%;
+    
+}
+
+.profileSidebarAvatarCont{
+    display:inline-block;
+    overflow: hidden;
+    border-radius:50%; 
+    width:5vw;
+    height:5vw;
+    margin: 1vh 1vw;
+    z-index:15;
+}
+
+.profileName{
+    color:black;
+    padding:2vh 1vw;
+    font-weight:600;
+}
+
+.profileSidebarWorkBox, .profileSidebarFollowerBox, .profileSidebarHistoryBox{
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding:2vh 0;
+    display:flex;
+    flex-direction: column;
+    
+}
+
+.profileSidebarColorBar{
+    background:#716994;
+    position:absolute;
+    display:block;
+    top:0;
+    width:100%;
+    height:8vh;
+    right:0;
+    z-index:10;
+}

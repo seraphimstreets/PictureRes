@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="514434843520-p49lm90dlqo2ct0p7qe0oo0qfvhjue2e.apps.googleusercontent.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src= "jquery.form.min.js"></script>
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+        <link rel="stylesheet" href="css/main2.css">
+        <link rel="stylesheet" href="css/extras.css">
+        <link rel="stylesheet" href="css/imgDisplay.css">
+        <script src='js/autosize.js'></script>
+        <style>
+            *:focus {
+    outline: 0 !important;
+}
+        </style>
+    </head>
+    <body>
+        <div class='zoomedImageCont mod'>
+            <img class='zoomedImage'>
+            <span class='zoomedImageCross fa fa-times fa-5x'></span>
+        </div>
+
+        <div class='modalOverlay2'></div>
+
+        
+            
+
+        <div id='imgDisplayModal' class="mod">
+            <div class='imgLeftHolder'>
+                
+            </div>
+            
+            <div class='descriptionRight'>
+                <div class='headerPart'>
+                    <div class='authorComponent'>
+                        <a class='authorAvatarCont'>
+                          
+                            <img class='authorAvatar'>
+                          
+                        </a>
+                        
+                        <a class='authorName'></a>
+                    </div>
+                </div>
+
+                <div class='descriptionComponent'>
+                    <p class='imgDescription'>Test Description</p>
+                </div>
+
+                <div class= 'cta-stats'>
+                    <p id="likeCount">5 likes</p>
+                    <p id="commentCount">2 comments</p>
+                </div>
+
+                <div class='callToActionComponent'>
+                    
+                    <div class='cta-row'>
+                        <button class='cta-item likeBtn'>Like<span class='fa fa-thumbs-up cta-item-icon'></span></button>
+                       
+                        <button class='cta-item commentBtn'>Comment<span class='fa fa-comment cta-item-icon'></span></button>
+                        
+                    </div>
+                </div>
+                <div class='imgCommentsSpace'>
+                        
+                </div>
+                <div class='commentsComponent'>
+                    <div class='addCommentsBar'>
+                        <div class='authorAvatarCont'>
+                            <img class='userAvatar'>
+                        </div>
+                        <div class='inputCommentCont'>
+                            <textarea class='inputComment' placeholder='Add a comment...' rows="1"></textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            var ar =  <%- img %>;
+            var globalUser;
+            var nextId = <%- next_id %>;
+            var prevId = <%- prev_id %>;
+            var albumId = <%- albumId %>;
+            
+            console.log(ar)
+            console.log(nextId)
+            console.log(prevId)
+            $('document').ready(() => {
+                $("#imgDisplayModal").css('display', "flex")
+            //fetching image information, incl. existing comments, subcomments etc.
+                fetchImage(ar._id)
+                initMiscellaneousHandlers(ar._id, nextId, prevId, albumId)
+
+            })
+         </script>
+        
+        <script src='js/handleSocialMedia.js'></script>
+        <script>
+            
+        </script>
+    </body>
+</html>

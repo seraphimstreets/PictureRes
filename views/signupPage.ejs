@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="514434843520-p49lm90dlqo2ct0p7qe0oo0qfvhjue2e.apps.googleusercontent.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src= "../jquery.form.min.js"></script>
+      
+        <link rel="stylesheet" href="fontawesome-free-5.13.0-web/css/fontawesome.min.css">
+
+        <link rel="stylesheet" href="css/main2.css">
+        <link rel="stylesheet" href="css/extras.css">
+        
+
+        
+        <title>Login Page</title>
+    </head>
+    <style>
+
+       
+        
+    </style>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=234873664520065&autoLogAppEvents=1"></script>
+        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+        <div id="signUpModal2" class="mod">
+            <div class="modal-header">
+                <h4>Sign Up</h4>
+               
+            </div>
+            <form id="signUpForm">
+                <div class="modal-body">
+                    <div class="modal-field">
+                        
+                        <input class="modal-text-input" name="username" id="username-sign" placeholder="Username">
+                    </div>
+                    
+                    <div class="modal-field">
+                        
+                        <input class="modal-text-input" name="password" id="password-sign" placeholder="Password" type="password">
+                    </div>
+        
+                    <div class="modal-field">
+                        
+                        <input class="modal-text-input" name="vpassword" id="vpassword-sign" placeholder="Verify Password" type="password">
+                    </div>
+                    <div class="warning-message">
+                        <p>The passwords do not match!</p>
+                    </div>
+           
+                    <div class="modal-footer-signup">
+                        <input type="submit" value="Submit" id="submitSignUp" onclick="handleSignUp()">
+                        <div class="social-media-bar">
+                            <a class="social-media-container" id="facebookBtn" href="users/auth/facebook"><img src="assets/images/social_media_icons/facebook-icon-preview.png"></a>
+                        
+                        
+                            <a class="social-media-container" id="googleBtn" href="users/auth/google"><img src="assets/images/social_media_icons/google-favicon-logo.png"></a>
+                    
+                            <a class="social-media-container" id="twitterBtn" href="users/auth/twitter"><img src="assets/images/social_media_icons/twitter-icon-circle--blue--logo-preview.png" ></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        
+            
+        </div>
+
+        <div class='featuredBackground'>
+            <img src="" class="backgroundImage1 bgs">
+            <img src="" class="backgroundImage2 fade bgs">
+        </div>
+    </body>
+    <script src="js/handleNav.js"></script>
+    <script>
+        $(document).ready(function(){
+            var imageList = ["7bbb79f9b0fd156f403c43c61b805d97.jpg", "background2.png", "CpbG4tqUsAA9ieA.jpg"]
+            var numImages = imageList.length
+            var bg1 = document.getElementsByClassName('backgroundImage1')[0]
+            var bg2 = document.getElementsByClassName('backgroundImage2')[0]
+            var counter = 1
+            bg1.src = imageList[0]
+            setInterval(function(){
+                if (counter%2 == 0){
+                    bg1.src = imageList[counter % numImages]
+                }else{
+                    bg2.src = imageList[counter % numImages ]
+                }
+                console.log(counter%numImages)
+           
+                bg1.classList.toggle('fade')
+                
+                bg2.classList.toggle('fade')
+                counter += 1
+            }, 5000)
+   
+        })
+    </script>
+</html>

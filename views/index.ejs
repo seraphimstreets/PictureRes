@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="514434843520-p49lm90dlqo2ct0p7qe0oo0qfvhjue2e.apps.googleusercontent.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src= "jquery.form.min.js"></script>
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main2.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/extras.css">
+        <link rel="stylesheet" href="css/profileSidebar.css">
+        <link rel="stylesheet" href="css/sections.css">
+        <link rel="stylesheet" href="css/gradientButton.css">
+        <link rel="stylesheet" href="css/imgDisplay.css">
+        
+
+               
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        <title>Landing Page</title>
+    </head>
+    <body>
+       
+      
+
+       
+        <header>
+            <%- include("partials/navbar.ejs") %> 
+
+            
+        </header>
+        
+        <button class='riseBtn'>
+            <span class='fa fa-arrow-up fa-2x'></span>
+        </button>
+         
+        <div class='zoomedImageCont mod'>
+            <img class='zoomedImage'>
+            <span class='zoomedImageCross fa fa-times fa-5x'></span>
+        </div>
+
+        <div class='modalOverlay2'></div>
+        
+           
+        
+        <div class='triple-section'>
+            <!--
+            <section class='row1'>
+                <div class='carousel-wrapper'>
+                    <div class='carousel'>
+                        <span class='carousel__button--next fa fa-angle-right fa-5x'></span>
+                        <span class='carousel__button--prev  fa fa-angle-left fa-5x'></span>
+                    </div>
+                </div>
+            </section>
+            -->
+           
+            <section class="row2">
+                <div class="mainCont">
+                    <div class='mainHeader'>
+                        <div class='headerCont'>
+                            <h3>Recommended Works</h3>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class='asideCont'>
+                    <div class='mainHeader'>
+                        <div class='headerCont'>
+                            <h3>Newest</h3>
+                        </div>
+                       
+                    </div>
+                </div>
+            </section>
+            <section class='row3'>
+                <div class="whitebox">
+
+                </div>
+            </section>
+        </div>   
+
+           
+
+
+  
+            
+       
+
+        <footer>
+            <div class='footerCont'>
+                <div class='footerLogo'><h3>PictureRes</h3</div>
+            </div>
+        </footer>
+        
+        <%- include("partials/navmodals.ejs") %> 
+       
+        <%- include("partials/imgDisplay.ejs") %> 
+  
+      
+
+        
+        
+       
+        <script src="js/generateImages.js"></script>
+        <script src="js/handleNav.js"></script>
+        <script src='js/autosize.js'></script>
+   
+        <script src="js/handleCarousel.js"></script>
+        <script src="js/handleMainPage.js"></script>
+        <script src="js/handleSocialMedia.js"></script>
+        <script>
+            
+            var user = "<%= user %>";
+            if(user){
+                user = user.replace(/&#34/g, "\"")
+                user = user.replace(/;/g,"" )
+                user = JSON.parse(user)
+            }
+            var token = "<%= token %>"
+
+            var loginTruth;
+            
+	   
+            
+            $(document).ready(function() {
+               
+                if(localStorage.getItem('token')){
+		 
+                    attemptJWTLogin()
+              
+                    if (localStorage.getItem('loginTruth') == 'false'){
+                        if(token){
+                            localStorage.setItem('token', token);
+                            attemptJWTLogin();
+                        }
+                        
+                    }
+                }else{
+                    if(token){
+                       
+                        localStorage.setItem('token', token);
+			
+                        attemptJWTLogin();
+                    
+                        
+                    }
+                }
+
+           
+
+                // add listener to disable scroll
+                
+
+                
+                $(document).on('click','.imDivRec',(e) => {
+                    console.log('HERE')
+                    var nextId = 1;
+                    var prevId = -1;
+                    var albumId = $(e.target).attr('data-albumId');
+                    var globalUser;
+                    
+                    var imId = $(e.target).attr('data-imgId');
+                    $("#imgDisplayModal").css('display', "flex")
+                    $('.imgDisplayModalOverlay').show()
+                    fetchImage(imId)
+                    initMiscellaneousHandlers(imId, nextId, prevId, albumId)
+                   
+                })
+
+                $(".imgDisplayModalOverlay").click(() =>  {
+                    $("#imgDisplayModal").hide()
+                    $('.imgDisplayModalOverlay').hide()
+               
+                })
+            })
+        </script>
+        <script>
+     
+        </script>
+    
+    </body>
+</html>

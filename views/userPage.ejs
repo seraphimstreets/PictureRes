@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="514434843520-p49lm90dlqo2ct0p7qe0oo0qfvhjue2e.apps.googleusercontent.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src= "../jquery.form.min.js"></script>
+        <link rel="stylesheet" href="css/main2.css">
+        
+        <link rel="stylesheet" href="css/extras.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/gradientButton.css">
+        <link rel="stylesheet" href="css/profileSidebar.css">
+        <link rel="stylesheet" href="css/userPage.css">
+        
+        <title>Userpage</title>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=234873664520065&autoLogAppEvents=1"></script>
+        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+        <header>
+            <%- include("partials/navbar.ejs") %> 
+
+            
+        </header>
+        <div class="bannerImageCont">
+            <img class="bannerImage" src="assets\images\62616718_p0_master1200.jpg">
+            <div class='bannerImageOverlay'></div>
+           
+        </div>
+        <div class="bottomProfileBar">
+            <div class='profileBarCont'>
+                <div class="profileBox">
+                    <img id="userpagePic" src="assets\\images\\generic.jpg">
+                   
+                </div>
+                <div class='sideProfile'>
+                    <div class="usernameCont">
+                        <h3 class='profileUsername'></h3>
+                    </div>
+                    <div class="profileInfoCont">
+                        <p class='followerCount profileInfoItem'>0 Followers</p>
+                        <p class='profileInfoItem profileInfoVert'>|</p>
+                        <p class='profileInfoItem'>0 Following</p>
+                        <p class='profileInfoItem profileInfoVert'>|</p>
+                        <p class='albumCount profileInfoItem'>0 Albums</p>
+                    </div>
+                    <div class="descriptionCont">
+                    
+                    </div> 
+                   
+                </div>
+                <div class="followBtnCont">
+                    <a class="simple-button bg-simple followBtn"><span>Follow</span></a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="profileNavBar">
+            <div class="profileNavTab"><span>Home</span></div>
+            <div class="profileNavTab"><span>About</span></div>
+            <div class="profileNavTab active"><span class='nav-active-bar'></span><span>Gallery</span></div>
+        </div>
+        
+            
+        <div class='userpageMain'>
+            <div class='userGallery'>
+
+            </div>
+        </div>
+        <div class='galleryActionBar'>
+            <div class='simple-button bg-simple deleteBtn'><span>Delete  <i class='fa fa-trash'></i></span></div>
+        </div>
+
+        <div id='successModal' class="mod modal">
+            <div class="modal-header">
+                <h4 id='success-header'>Success</h4>
+                <span id="delete-close" class="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id='success-message'>The operation was carried out successfully</p>
+            </div>
+            <div class="modal-footer-success">
+                <button value="OK" class='okModal' id='deleteOk'>OK</button>
+            </div>
+        </div>
+
+        <div class='modalOverlay' id='deleteOverlay'>
+        </div>
+        
+
+        <%- include("partials/navmodals.ejs") %> 
+
+        
+        
+     
+        <script>
+            
+            var user = <%- user %>;
+           
+            var token = "<%= token %>"
+            var globalVisitor;
+            console.log(user)
+            $(document).ready(function() {
+                
+                $('form').submit(false);
+                $('#signUpForm').attr('autocomplete', 'off');
+              
+
+                $('#upload-close').click(() => {
+                    
+                    clearFileInput()
+                })
+
+                $('#loginBtn').click(() => {
+                    $("#navModal").show()
+                    $(".modalOverlay").show()
+                })
+
+                $('#logoutBtn').click(() => {
+                    destroyAvatar()
+                })
+
+                $('.uploadImgBtn').click(() => {
+                    $("#imageUploadModal").show()
+                    $(".modalOverlay").show()
+                })
+                
+            
+
+                $('#signUpBtn').click(() => {
+                    $("#signUpModal").show()
+                    $(".modalOverlay").show()
+                })
+
+                $('#deleteOverlay').click(() => {
+                    $('.mod').hide()
+                    $('.modalOverlay').hide()
+                    location.reload(); 
+                })
+                $('#delete-close').click(() => {
+                    $('.mod').hide()
+                    $('.modalOverlay').hide()
+                    location.reload(); 
+                })
+                
+                $('#deleteOk').click(() => {
+                    $('.mod').hide()
+                    $('.modalOverlay').hide()
+                    location.reload(); 
+                  
+                })
+
+                
+
+
+          
+                console.log(token)
+                if(token){
+                    localStorage.setItem('token', token);
+                    attemptJWTLogin();
+                
+                    
+                }
+
+           
+                
+      
+                                
+            })
+        </script>
+        <script src="js/handleNav.js"></script>
+        <script src="js/buildUserpage.js"></script>
+    </body>
+    
+</html>

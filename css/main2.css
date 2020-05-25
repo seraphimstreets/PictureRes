@@ -1,0 +1,241 @@
+
+
+
+
+/* reset defaults */
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+
+
+
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+    outline: inherit;
+    
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover 
+{
+    
+     text-decoration:none; 
+     cursor:pointer;  
+}
+
+/* font-faces */
+@font-face {
+    font-family: 'Zealot College';
+    src: url('../fonts/ZealotCollege.woff2') format('woff2'),
+        url('../fonts/ZealotCollege.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Glue Gun';
+    src: url('../fonts/GlueGun.woff2') format('woff2'),
+        url('../fonts/GlueGun.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Zealot Expanded';
+    src: url('../fonts/ZealotExpanded.woff2') format('woff2'),
+        url('../fonts/ZealotExpanded.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Zealot';
+    src: url('../fonts/Zealot.woff2') format('woff2'),
+        url('../fonts/Zealot.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+
+/* setting root variables and body */
+
+:root{
+  
+    --primary-color:#7d5ba6;
+    --secondary-color:#255784;
+
+    --body-color:#e4e7ee;
+    --header-color:#494368;
+    
+}
+
+
+body{
+    font-family:'Montserrat'; 
+    font-size: 1.2vw;
+    background:#e4e7ee;
+}
+
+
+/* main content */
+
+main{
+
+    background: var(--body-color);
+  
+    
+}
+
+
+/*picture display grid */
+
+.rowDiv{
+    display: flex;
+    justify-content: space-evenly;
+
+
+    margin-bottom:2vh;
+    
+    
+}
+
+
+
+.cardDiv{
+    display: inline-block;
+    position:relative;
+    margin:1%;
+    
+    height:20vw;
+    width:15vw;
+    margin-bottom:6vh;
+   
+    text-align:center;
+ 
+}
+
+.imDiv{
+
+    background:black;
+
+    overflow:hidden;
+    align-items:center;
+
+}
+
+.imDivCont{
+    position:relative;
+    box-shadow:  0 4px 5px 0 rgba(0,0,0,0.32),0 4px 10px 0 rgba(0,0,0,0.24);
+}
+
+.imDiv img{
+    width:100%;
+ 
+
+    position: relative;
+top: 50%;
+transform: translateY(-50%);
+z-index:0;
+   
+}
+
+.imDiv:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  }
+
+
+
+
+.imDivRec{
+   
+    width: 15vw; 
+    height:15vw;
+  }
+
+.allDiv{
+
+    width:100%;
+    padding-bottom:7vh;
+}
+
+
+.bottomCont{
+    display:flex;
+    flex-direction: column;
+    overflow:hidden;
+    justify-content: center;
+    margin: 1vh 1vw;
+}
+.cardTitle{
+    margin-top:2vh;
+    font-family: 'Open Sans';
+    font-size:1em;
+    margin-bottom:1vh;
+}
+
+.cardAuthor{
+    font-family:'Open Sans';
+    color:rgba(0,0,0,0.8);
+    font-size:0.8em;
+  
+}
+
+/*riseBtn*/
+
+.riseBtn{
+    position:fixed;
+    bottom:2vh;
+    right:2vw;
+    z-index:99;
+    border-radius:50%;
+    background:rgba(0,0,0,0.1);
+    color:#e4e4e4;
+    cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:1vw 1vw;
+
+}
+
+
+/* footer */
+
+
+
+footer{
+    width:100%;
+    height:35vh;
+    float:left;
+    display:block;
+    margin-top:10vh;
+}
+.footerCont{
+    display:flex;
+    height:100%;
+    background:#05202e;
+    justify-content: center;
+    padding-top:10%;
+}
+
+.footerLogo{
+    display:none;
+    color:white;
+    font-size: large;
+}

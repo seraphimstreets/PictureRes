@@ -1,0 +1,287 @@
+.triple-section{
+    display:flex;
+    flex-direction:column;
+    
+    width:100vw;
+    background:white;
+   
+}
+
+.row1{
+    background-color:white ;
+    height:100vh !important;
+    position: relative;
+    overflow:hidden;
+    width:100%;
+    display:flex;
+    align-items: center;
+     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,e5e5e5+96 */
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c5c0db+1,e4e7ee+100 */
+background: #c5c0db; /* Old browsers */
+background: -moz-linear-gradient(top, #fff 1%, var(--body-color) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #fff 1%,var(--body-color) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fff 1%,var(--body-color) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c5c0db', endColorstr='#e4e7ee',GradientType=0 ); /* IE6-9 */
+
+}
+
+
+
+.row1 li, .row2 li, .row3 li{
+    float:left;
+  
+}
+
+
+    
+.row2{
+   
+    display:flex;
+    justify-content: center;
+    position: relative;
+    overflow:hidden;
+    width:100%;
+    display:flex;
+    
+    background-color:  var(--body-color);
+    padding-bottom:10vh;
+}
+
+.row3{
+    height:40vh;
+    background-color:var(--body-color);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.mainCont{
+    width:60%;
+    height:100%;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color:white;
+    flex-direction: column;
+    margin: 0 3vw;
+    box-shadow:  0 4px 5px 0 rgba(0,0,0,0.32),0 4px 10px 0 rgba(0,0,0,0.24);
+  padding: 3vh 2vw;
+ 
+}
+
+.mainHeader{
+   
+    width:100%;
+    display:flex;
+    align-items: center;
+padding-bottom:3vh;
+}
+
+.headerCont{
+    display:flex;
+    background-color: #f2f4f6;
+    width:100%;
+    padding: 2vh 1.5vw;
+    border-radius:8px;
+}
+.asideCont{
+    width:20%;
+    display:block;
+     padding: 3vh 2vw;
+    background-color:white;
+    box-shadow:  0 4px 5px 0 rgba(0,0,0,0.32),0 4px 10px 0 rgba(0,0,0,0.24);
+}
+
+/* .whitebox{
+  display:block;
+  width:82%;
+  background:white;
+  height:100%;
+  box-shadow:  0 4px 5px 0 rgba(0,0,0,0.32),0 4px 10px 0 rgba(0,0,0,0.24);
+} */
+
+.mainCont{
+display:block;
+padding:5vh 2vw;
+}
+
+.carousel-wrapper {
+    overflow: hidden;
+    width: 80%;
+    margin: auto;
+    height:100%;
+  }
+  
+  /* Apply 'border-box' to 'box-sizing' so border and padding is included in the width and height. */
+  .carousel-wrapper{
+    transform:translateY(-11vh);
+  }
+  
+  /* We'll be using the 'transform' property to move the carousel's items, so setting the 'transform-style' to 'preserve-3d' will make sure our nested elements are rendered properly in the 3D space. */
+  .carousel {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    display:flex;
+    height:100%;
+  }
+  
+  /* By default we're hiding items (except the initial one) until the JS initiates. Elements are absolutely positioned with a width of 100% (as we're styling for mobile first), letting the content's height dictate the height of the carousel. Our magic property here for all our animation needs is 'transition', taking the properties we wish to animate 'transform' and 'opacity', along with the length of time in seconds. */
+  .carousel__item {
+    opacity: 0;
+    position: absolute;
+    top:50%;
+    left:50%;
+   
+   
+    margin: auto;
+    padding: 6vh 1.5vw;
+    
+    z-index: 100;
+    transition: z-index .5s, opacity .5s, scale .5s, transform .5s;
+    order:2;
+    
+    transform: translate(-50%, -50%) scale(0.5);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+ 
+  
+  }
+  
+  /* Display the initial item and bring it to the front using 'z-index'. These styles also apply to the 'active' item. */
+  .carousel__item.initial,
+  .carousel__item.active,
+  .carousel__item.prev,
+  .carousel__item.next{
+    opacity: 1;
+    
+    z-index: 900;
+  
+    
+   
+  }
+.carousel__item.active{
+    transform: translate(-50%, -40%);
+}
+  
+
+  .carousel__item.prev{
+    opacity:1;
+    transform:  translate(-105%, -48%) scale(0.8);
+}
+
+.carousel__item.next{
+    opacity:1;
+    transform: translate(5%, -48%) scale(0.8);
+}
+
+.carousel__item.prevprev{
+  opacity:1;
+  transform:  translate(-150%, -50%) scale(0.5);
+  
+}
+
+/* Translate next item to the right */
+.carousel__item.nextnext {
+    opacity:1;
+  transform:  translate(50%, -50%) scale(0.5);
+}
+  
+  /* Set 'z-index' to sit behind our '.active' item. */
+  .carousel__item.prev,
+  .carousel__item.next {
+    z-index: 800;
+    overflow:hidden;
+ 
+  }
+ 
+  .carousel__item .imDiv{
+    height:24vw;
+    width:24vw;
+
+}
+
+  .carousel__item .imOverlay{
+    width: 100%; height:100%;
+    top:0;
+    background:#000;
+    opacity: 1;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    position: absolute;
+  }
+
+  .carousel__item.prev .imOverlay,  .carousel__item.next .imOverlay {
+    opacity:0.5;
+    
+    
+}
+
+.carousel__item.prevprev .imOverlay,  .carousel__item.nextnext .imOverlay {
+    opacity:0.8;
+    
+}
+
+.carousel__item.active .imOverlay{
+    opacity:0;
+}
+  /* Translate previous item to the left */
+
+  
+  /* Style navigation buttons to sit in the middle, either side of the carousel. */
+  .carousel__button--prev,
+  .carousel__button--next {
+    position: absolute;
+    top:50%;
+    width: 3rem;
+    height: 3rem;
+    
+    color:rgba(0,0,0,0.2);
+    transform:translateY(-50%);
+    cursor: pointer; 
+    z-index: 1001; /* Sit on top of everything */
+    
+  /*  opacity: 0;  Hide buttons until carousel is initialised 
+    transition:opacity 1s;*/
+  }
+
+  .carousel__button--next{
+      text-align: right;
+  }
+  
+  .carousel__button--prev {
+    left:0;
+  }
+  
+  .carousel__button--next {
+    right:0;
+  }
+  
+ 
+
+
+
+
+
+.carousel__item h2{
+    opacity:0;
+    font-size:1em;
+    margin:1vh 0;
+    margin-top:5vh;
+}
+
+.carousel__item.active h2{
+ opacity:1;
+  font-size:1.2em;
+}
+
+.carousel__item p{
+    opacity:0;
+    align-items: center;
+    display:flex;
+}
+
+.carousel__item.active p{
+    opacity:1;
+}

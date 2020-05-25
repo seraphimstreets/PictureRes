@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="514434843520-p49lm90dlqo2ct0p7qe0oo0qfvhjue2e.apps.googleusercontent.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src= "../jquery.form.min.js"></script>
+        <script src="../jquery-ui.js" type="text/javascript"></script>
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/main2.css">
+        <link rel="stylesheet" href="css/navbar.css">
+        <link rel="stylesheet" href="css/extras.css">
+        
+        <link rel="stylesheet" href="css/imageUploader.css">
+        <link rel="stylesheet" href="css/profileSidebar.css">
+        
+        <title>Landing Page</title>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=234873664520065&autoLogAppEvents=1"></script>
+        
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+       
+        <header>
+            <%- include("partials/navbar.ejs") %> 
+
+            
+        </header>
+        <main>
+            <form method="post" enctype="multipart/form-data" action="/upload/uploadAlbum" id="mulImageUploadForm">
+                <div class='selectorBody'>
+                    <div class='imagePreveiewLarge'>
+                        
+                            <div class='imageRow'>
+                                
+                                <output id='mulFileResult'>
+                                    
+                                    <label for="mulFileUpload" class='addImageBox'>
+                                        <p>+</p>
+                                    </label>
+                                   
+                                </output>
+                                <input id= "mulFileUpload" name="file[]" type="file" multiple="multiple" size="64"/> 
+                                
+                    
+                            </div>
+                      
+                    </div>
+                    
+                </div>
+                <div class='albumUploadDetails'>
+
+               
+
+                    <div class='imageUploadDetails'>
+                    
+                    
+                        <div class='detailsRow'>
+                            <input type='text' name='uploadTitle' id='uploadTitle' placeholder="Title">
+                            <textarea id='uploadDescription' rows="4"  placeholder="Add a description..." name="uploadDescription"></textarea>
+                            
+                        
+                            
+                        </div>
+            
+                    
+
+                        <div class='detailsRow'>
+                            <label for='uploadTags'>Tags:</label>  
+                            <div class='uploadTagsCont'>
+                                <div id='tagsCont'>
+
+                                </div>
+                                <input type='text' name='uploadTags' id='uploadTags'>
+                            </div>
+
+                        </div>
+                        
+                        <div class='detailsRow'>
+                            <input type='button' value='Submit' id='uploadSubmit'>
+                        </div>
+                    </div>
+                    
+           
+                </div>
+       
+            </form>
+        </main>
+  
+
+        <div class='mod imageDescriptionModal' id='imageDescriptionTemplate'>
+            <div class="modal-header imageDescriptionHeader">
+                <h4>Image Details</h4>
+                <span class="closeModal">&times;</span>
+            </div>
+            <div class='imageDescriptionBody'>
+                <div class='imageDescriptionCont'>
+              
+                    <textarea class='imageDescription' rows="6"></textarea> 
+                </div>
+            
+                
+            </div>
+            <div class='imageDescriptionFooter'>
+                <div class='imageDescriptionDoneCont'>
+                    <input type='button' value='Done' class='imageDescriptionDone'> 
+                </div>
+            </div>
+           
+            
+        
+        </div>
+
+        <div id='successModal' class="mod modal">
+            <div class="modal-header">
+                <h4 id='success-header'>Success</h4>
+                <span id="upload-close" class="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id='success-message'>The operation was carried out successfully</p>
+            </div>
+            <div class="modal-footer-success">
+                <button value="OK" class='okModal'>OK</button>
+            </div>
+        </div>
+
+        <div class='modalOverlay'>
+        </div>
+
+
+    
+
+        <script src="js/handleNav.js"></script>
+        <script src="js/handleMultiUploads.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#uploadTags").attr('data-value',"")
+                $("#uploadTags").on('keypress', (e) => {
+                    if(e.keyCode == 13){
+                        var temp = $("#uploadTags").attr('data-value')
+                        if(temp!=""){
+                            $("#uploadTags").attr('data-value',temp + ',' + $("#uploadTags").val())
+                        }else{
+                            $("#uploadTags").attr('data-value',$("#uploadTags").val())
+                        }
+
+                    
+                        var $newTag = $(document.createElement('span')).html('#' + $("#uploadTags").val()).addClass('newTag')
+
+                        $('#tagsCont').append($newTag)
+                        $("#uploadTags").val("")
+                        console.log($("#uploadTags").attr('data-value'))
+                    }
+                })
+                
+                $('#uploadClose, .okModal').click(() => {
+                    $('.mod').hide()
+                    $('.modalOverlay').hide()
+                    window.location.reload(false);
+                })
+               
+            })
+        </script>
+        
+        <script>
+            
+            var user = "<%= user %>";
+            if(user){
+                user = user.replace(/&#34/g, "\"")
+                user = user.replace(/;/g,"" )
+                user = JSON.parse(user)
+            }
+            var token = "<%= token %>"
+
+            var globalFileList = [];
+            var globalFileObject = {};
+            var globalDescriptionObject = {};
+            var globalFileCounter = 0
+            var internalFileCounter = 0
+            var newOrder = [];
+            
+            $(document).ready(function() {
+               
+                if(localStorage.getItem('token') != 'null'){
+                    attemptJWTLogin()
+                  
+                    if (localStorage.getItem('loginTruth') == 'false'){
+                        if(token){
+                            localStorage.setItem('token', token);
+                            attemptJWTLogin();
+                        }
+                        
+                    }
+                }else{
+                    if(token){
+                       
+                        localStorage.setItem('token', token);
+                        attemptJWTLogin();
+                    
+                        
+                    }
+                }
+               
+               
+                $('.profileName').html(user.username)
+         
+    
+           
+      
+      
+                                
+            })
+        </script>
+        <script type="text/javascript">
+            $(function() {
+             
+                $( "#mulFileResult" ).sortable({
+                    revert: true,
+                
+                }).bind('sortupdate', function() {
+                    reworkOrder()
+                });;
+            });
+        </script>
+    </body>
+</html>

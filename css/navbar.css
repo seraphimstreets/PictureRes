@@ -1,0 +1,170 @@
+header{
+    height:10vh;
+}
+
+.left-bar{
+    display:block;
+    width:30vw;
+}
+
+
+
+.main-navigation{
+    padding: 0 8%;
+    height:10vh;
+    width:100%;
+ 
+    background-color:var(--header-color);
+    position:fixed;
+    display:flex;
+    flex:1;
+    z-index:30;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    font-size:2.2vh;
+}
+
+.nav-links{
+    display:flex;
+    float:left;
+    font-size:100%;
+
+}
+
+.nav-logo{
+    font-family:'Zealot';
+    font-size:1em;
+}
+
+.login-links li, .logout-links li, .nav-links li{
+    display:inline-block;
+    padding: 3.8vh 2vw;
+    
+}
+
+
+.right-bar{
+    display:block;
+    width:24vw;
+}
+
+
+
+.login-links{
+    display:block;
+    float:right;
+    
+}
+
+.logout-links{
+    display:none;
+    float:right;
+    align-items: center;
+}
+
+.fa-angle-down{
+    color:#d4d4d4;
+    position: relative;
+  
+}
+
+.profile-navigation{
+   
+    position:absolute;
+    display:none;
+    
+    top:10vh;
+    right:8%;
+   
+}
+
+.profile-navigation li{
+    display:flex;
+    width:18vw;
+    padding:1vh 1vw;
+   
+    color:#d4d4d4
+
+}
+
+.profile-navigation li:hover{
+ 
+    color:#d4d4d4
+
+}
+
+.profileCont{
+    padding-right:1vw;
+    display:flex;
+    align-items: center;
+}
+
+
+
+.search-bar {
+    display:block;
+    width:100%;
+    height:100%;
+    background-color:var(--header-color);
+    border:none;
+    font-size:100%;
+    padding:3%;
+    color:#d4d4d4;
+
+}
+
+.search-bar::-webkit-input-placeholder {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  }
+  
+  .search-bar:-ms-input-placeholder {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  }
+  
+  .search-bar:-moz-placeholder {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  }
+  
+  .search-bar::-moz-placeholder {
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  }
+
+  .avatarContainer img{
+    display:block;
+    
+    width:100%;
+    
+}
+
+.avatarContainer{
+    display:inline-block;
+    overflow: hidden;
+    border-radius:50%; 
+    width:6vh;
+    height:6vh;
+    margin: 1vh 1vw;
+}
+
+.avatarPic{
+    width:100%;
+}
+
+
+.avatarContainer:hover{
+    
+    box-shadow: 0 0 3px #ddd;
+    cursor:pointer;
+}
+
+
+.empty-space{
+    display:flex;
+    flex-grow: 1;
+}
+
+
+a{
+    color:#d4d4d4;
+    text-decoration:none;
+  
+
+}
