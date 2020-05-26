@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="css/profileSidebar.css">
         <link rel="stylesheet" href="css/sections.css">
         <link rel="stylesheet" href="css/gradientButton.css">
-        <link rel="stylesheet" href="css/imgDisplay.css">
+        
         
 
                
@@ -38,13 +38,11 @@
             <span class='fa fa-arrow-up fa-2x'></span>
         </button>
          
-        <div class='zoomedImageCont mod'>
-            <img class='zoomedImage'>
-            <span class='zoomedImageCross fa fa-times fa-5x'></span>
+       
+        <div id="Red">
+            <p>Red</p>
         </div>
-
-        <div class='modalOverlay2'></div>
-        
+            
            
         
         <div class='triple-section'>
@@ -87,8 +85,6 @@
            
 
 
-  
-            
        
 
         <footer>
@@ -97,9 +93,9 @@
             </div>
         </footer>
         
-        <%- include("partials/navmodals.ejs") %> 
+
        
-        <%- include("partials/imgDisplay.ejs") %> 
+       
   
       
 
@@ -108,11 +104,11 @@
        
         <script src="js/generateImages.js"></script>
         <script src="js/handleNav.js"></script>
-        <script src='js/autosize.js'></script>
-   
+      
+        <script src="js/html2canvas.js"></script>
         <script src="js/handleCarousel.js"></script>
         <script src="js/handleMainPage.js"></script>
-        <script src="js/handleSocialMedia.js"></script>
+     
         <script>
             
             var user = "<%= user %>";
@@ -152,31 +148,16 @@
                 }
 
            
-
-                // add listener to disable scroll
+                $('#Red').click(() => {
+                    html2canvas(document.body).then(canvas => console.log(canvas))
+                })
                 
-
-                
-                $(document).on('click','.imDivRec',(e) => {
-                    console.log('HERE')
-                    var nextId = 1;
-                    var prevId = -1;
-                    var albumId = $(e.target).attr('data-albumId');
-                    var globalUser;
-                    
-                    var imId = $(e.target).attr('data-imgId');
-                    $("#imgDisplayModal").css('display', "flex")
-                    $('.imgDisplayModalOverlay').show()
-                    fetchImage(imId)
-                    initMiscellaneousHandlers(imId, nextId, prevId, albumId)
+                $(document).on('click', 'imDiv', () => {
                    
                 })
+                
+           
 
-                $(".imgDisplayModalOverlay").click(() =>  {
-                    $("#imgDisplayModal").hide()
-                    $('.imgDisplayModalOverlay').hide()
-               
-                })
             })
         </script>
         <script>

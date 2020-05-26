@@ -190,11 +190,15 @@ albumRouter.route('/:albumId/')
                 var next_id = -1;
             }
 
+            if(req.query.origPage){
+                var origPage = req.query.origPage 
+            }
+
             console.log(next_id)
        
             res.statusCode = 200;
             res.setHeader('Content-Type' , 'text/html' );
-            res.render('imgDisplay.ejs', {img:JSON.stringify(img), prev_id:prev_id, next_id:next_id, albumId:JSON.stringify(req.params.albumId)})
+            res.render('imgDisplay.ejs', {img:JSON.stringify(img), prev_id:prev_id, next_id:next_id, origPage: JSON.stringify(origPage), albumId:JSON.stringify(req.params.albumId)})
     })
 })
 

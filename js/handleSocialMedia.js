@@ -3,7 +3,7 @@
 
 
 
-function initMiscellaneousHandlers(imgId, nextId, prevId, albumId){
+function initMiscellaneousHandlers(imgId, nextId, prevId, albumId, origPage){
 
     var likeEnabled= true;
     //handle submitting likes for image
@@ -81,7 +81,8 @@ function initMiscellaneousHandlers(imgId, nextId, prevId, albumId){
     //handle zoomins and left/right
     if(nextId > -1){
   
-        var $rightArrowContainer =  $(document.createElement('a')).addClass('rightArrowContainer arrowCont').attr('href', 'https://' + window.location.host + "/albums/"+albumId+"/?page=" + nextId)
+        var $rightArrowContainer =  $(document.createElement('a')).addClass('rightArrowContainer arrowCont')
+        .attr('href', 'https://' + window.location.host + "/albums/"+albumId+"/?page=" + nextId + "&origPage=" + encodeURIComponent(origPage))
         var $rightButton = $(document.createElement('span')).addClass('fa fa-angle-right fa-5x rightBtn')
         $rightArrowContainer.append($rightButton)
         $('.imgLeftHolder').append($rightArrowContainer)
@@ -89,7 +90,8 @@ function initMiscellaneousHandlers(imgId, nextId, prevId, albumId){
 
     if(prevId > -1){
       
-        var $leftArrowContainer =  $(document.createElement('a')).addClass('leftArrowContainer arrowCont').attr('href', 'https://' + window.location.host + "/albums/"+albumId+"/?page=" + prevId)
+        var $leftArrowContainer =  $(document.createElement('a')).addClass('leftArrowContainer arrowCont')
+        .attr('href', 'https://' + window.location.host + "/albums/"+albumId+"/?page=" + prevId + "&origPage=" + encodeURIComponent(origPage))
         var $leftButton = $(document.createElement('span')).addClass('fa fa-angle-left fa-5x leftBtn')
        
         $leftArrowContainer.append($leftButton)
@@ -143,6 +145,10 @@ function initMiscellaneousHandlers(imgId, nextId, prevId, albumId){
         $('.zoomedImageCross').css('color','rgba(248,248,248,0.7)')
     }, () => {
         $('.zoomedImageCross').css('color','rgba(248,248,248,0.55)')
+    })
+
+    $(".backBtn, .backBtnCont").click(() => {
+        window.location.replace(origPage)
     })
 }
 /* Miscellaneous functions */

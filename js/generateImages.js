@@ -65,14 +65,13 @@ function buildCard(imList, albumIds, all){
     if(all.albumList[ind].images.length > 1){
        nextId = all.albumList[ind].images[1]._id
     }
-    $imDiv = $(document.createElement('div')).addClass('imDivRec imDiv').attr('data-imgId', imgId)
-    .attr('data-nextId', nextId).attr('data-albumId', albumId);
+    $imDiv = $(document.createElement('div')).addClass('imDivRec imDiv')
             
-            
-    $link = $(document.createElement('a')).attr('data-imgId', imgId).attr('data-nextId', nextId).attr('data-albumId', albumId)
+    $link = $(document.createElement('a')).attr('data-imgId', imgId)
+    .attr('href', "https://" + window.location.host + "/albums/" + albumId + "?origPage=" + encodeURIComponent(window.location.href));
 
     $im = $(document.createElement('img')).attr('src', imList[ind]).addClass("im" + ind.toString())
-    .attr('data-imgId', imgId).attr('data-nextId', nextId).attr('data-albumId', albumId)
+  
 
     $cardDiv = $(document.createElement('div')).addClass('cardDiv')
     $bottomCont = $(document.createElement('div')).addClass('bottomCont')

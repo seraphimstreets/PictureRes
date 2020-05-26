@@ -175,7 +175,7 @@ function getUserAlbumsFromServer(userId){
                 $imDiv = $(document.createElement('div')).addClass('imDivRec imDiv');
                 
                 
-                $link = $(document.createElement('a')).attr('href', '/albums/' + albumIds[ind])
+                $link = $(document.createElement('a')).attr('href', '/albums/' + albumIds[ind] + '/?origPage=' + encodeURIComponent(window.location.href))
 
                 $im = $(document.createElement('img')).attr('src', imList[ind]).addClass("im" + ind.toString())
                 $cardDiv = $(document.createElement('div')).addClass('userCardDiv')

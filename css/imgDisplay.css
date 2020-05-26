@@ -477,3 +477,31 @@ cursor:pointer;
 .modalOverlay2{
     z-index:5;
 }
+
+.backBtnCont{
+    position:fixed;
+    top:2vh;
+    left:2vw;
+    width:5vw;
+    height:6vh;
+    width:6vh;
+    background:rgba(248,248,248,0.2);
+    color:rgba(248,248,248,0.35);
+    border-radius:50%;
+    z-index:9000;
+    align-items: center;
+    justify-content: center;
+    display:flex;
+    font-size:3em;
+    font-weight:200;
+
+
+}
+
+
+.backBtnCont:hover{
+    cursor:pointer;
+    background:rgba(248,248,248,0.4);
+    color:rgba(248,248,248,0.6);
+
+}
