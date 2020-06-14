@@ -1,0 +1,78 @@
+.mainCarousel{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    position:relative;
+    
+}
+
+.carousel-main{
+    opacity:0;
+    transition: z-index .5s, opacity 0.5s, scale .5s, transform 1s;
+    position:absolute;
+    overflow:hidden;
+}
+
+
+
+.carousel-main-nextgroup{
+    opacity:0;
+    transform:translateX(800%);
+   
+    
+}
+
+
+.carousel-main-prevgroup{
+    opacity:0;
+    transform:translateX(-800%);
+ 
+    
+}
+
+
+.carousel-main-active{
+    display:flex;
+    transform:translateX(0%);
+    opacity:1;
+   position:relative;
+    margin:1% 1%;
+}
+
+.carousel-main-following--prev,
+.carousel-main-following--next,
+.carousel-main-newest--prev,
+.carousel-main-newest--next,
+.carousel-main-recommended--prev,
+.carousel-main-recommended--next
+ {
+  position: absolute;
+
+  width: 3rem;
+  height: 3rem;
+  
+  color:rgba(0,0,0,0.2);
+
+  cursor: pointer; 
+  z-index: 1001; /* Sit on top of everything */
+
+  
+/*  opacity: 0;  Hide buttons until carousel is initialised 
+  transition:opacity 1s;*/
+}
+
+.carousel-main-following--next,  .carousel-main-newest--next, .carousel-main-recommended--next{
+    text-align: right;
+}
+
+.carousel-main-following--prev,.carousel-main-newest--prev, .carousel-main-recommended--prev {
+  left:10vw;
+}
+
+.carousel-main-following--next, .carousel-main-newest--next, .carousel-main-recommended--next {
+  right:10vw;
+}

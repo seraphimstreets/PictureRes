@@ -159,6 +159,63 @@ albumRouter.route('/useralbum/:userId')
     .catch(err => next(err))
 })
 
+albumRouter.route('/following/')
+.get(authenticate.verifyUser, (req,res,next) => {
+    Users.findById(req.user._id)
+    .populate("following")
+    .populate({path:'following',
+        populate:{
+            path:'albums',
+            populate:{
+                path:'images',
+                model:'Image'
+            }
+        }
+    })
+    .populate({path:'following',
+        populate:{
+            path:'albums',
+            populate:{
+                path:'author',
+                model:'User'
+            }
+        }
+    })
+    .populate({path:'following',
+    populate:{
+        path:'albums.images',
+        model:'Image'
+    }
+})
+    .then(author => {
+        var albumList = []
+        count = 0 
+        authorcount = 0
+     
+
+     
+        for(i=0;i<author.following.length;i++){
+           for(j=0;j<author.following[i].albums.length;j++){
+               albumList.push(author.following[i].albums[j])
+               if(albumList.length > 11){
+                res.statusCode = 200;
+                res.setHeader('Content-Type' , 'application/json' );
+    
+                res.json({'albumList':albumList});
+               }
+           }
+              
+        }
+        console.log(albumList)
+        res.statusCode = 200;
+        res.setHeader('Content-Type' , 'application/json' );
+
+        res.json({'albumList':albumList});
+    })
+ 
+})
+
+
 albumRouter.route('/:albumId/')
 .get(cors.cors, (req,res,next)=>{
     Albums

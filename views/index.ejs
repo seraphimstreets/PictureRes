@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/navbar.css">
         <link rel="stylesheet" href="css/extras.css">
         <link rel="stylesheet" href="css/profileSidebar.css">
+        <link rel="stylesheet" href="css/mainPageCarousels.css">
         <link rel="stylesheet" href="css/sections.css">
         <link rel="stylesheet" href="css/gradientButton.css">
         
@@ -39,9 +40,7 @@
         </button>
          
        
-        <div id="Red">
-            <p>Red</p>
-        </div>
+     
             
            
         
@@ -56,30 +55,37 @@
                 </div>
             </section>
             -->
+            <section class="following">
+                <div class='headerCont'>
+                    <h3>Works by Following</h3>
+                </div>
+                <div class="mainCarousel" id="followingCarousel">
+                    <span class='carousel-main-following--next fa fa-angle-right fa-3x'></span>
+                    <span class='carousel-main-following--prev  fa fa-angle-left fa-3x'></span>
+                </div>
+            </section>
            
-            <section class="row2">
-                <div class="mainCont">
-                    <div class='mainHeader'>
-                        <div class='headerCont'>
-                            <h3>Recommended Works</h3>
-                        </div>
-                       
-                    </div>
+            <section class="recommended">
+                <div class='headerCont'>
+                    <h3>Recommended Works</h3>
                 </div>
-                <div class='asideCont'>
-                    <div class='mainHeader'>
-                        <div class='headerCont'>
-                            <h3>Newest</h3>
-                        </div>
-                       
-                    </div>
+                <div class="mainCarousel"  id="recommendedCarousel">
+                    <span class='carousel-main-recommended--next fa fa-angle-right fa-3x'></span>
+                    <span class='carousel-main-recommended--prev fa fa-angle-left fa-3x'></span>
                 </div>
             </section>
-            <section class='row3'>
-                <div class="whitebox">
 
+            <section class="newest">
+                <div class='headerCont'>
+                    <h3>Newest</h3>
+                </div>
+                <div class="mainCarousel"  id="newestCarousel">
+                    <span class='carousel-main-newest--next fa fa-angle-right fa-3x'></span>
+                    <span class='carousel-main-newest--prev fa fa-angle-left fa-3x'></span>
+               
                 </div>
             </section>
+        
         </div>   
 
            
@@ -106,7 +112,7 @@
         <script src="js/handleNav.js"></script>
       
         <script src="js/html2canvas.js"></script>
-        <script src="js/handleCarousel.js"></script>
+       
         <script src="js/handleMainPage.js"></script>
      
         <script>
@@ -147,10 +153,7 @@
                     }
                 }
 
-           
-                $('#Red').click(() => {
-                    html2canvas(document.body).then(canvas => console.log(canvas))
-                })
+   
                 
                 $(document).on('click', 'imDiv', () => {
                    

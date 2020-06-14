@@ -120,11 +120,11 @@ main{
 .cardDiv{
     display: inline-block;
     position:relative;
-    margin:1%;
+    margin:2% 1%;
     
     height:20vw;
     width:15vw;
-    margin-bottom:6vh;
+    
    
     text-align:center;
  
@@ -169,7 +169,7 @@ z-index:0;
   }
 
 .allDiv{
-
+    display:contents;
     width:100%;
     padding-bottom:7vh;
 }

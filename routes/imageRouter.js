@@ -141,6 +141,7 @@ imageRouter.route('/detailed/:imageId')
 .put()
 .delete();
 
+
 imageRouter.route('/imFind/')
 .get(cors.cors, (req,res,next)=>{
     Images

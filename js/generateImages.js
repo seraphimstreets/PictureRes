@@ -1,5 +1,5 @@
+var latestAlbumList;
 
-  
  function getImagesFromServer(index){
 
     console.log( 'https://' + window.location.host + '/albums/?latest=1')
@@ -28,14 +28,62 @@
                 albumIds.push(all.albumList[i]._id)
             }
             console.log(imList)
-	        
+	        latestAlbumList = all.albumList
         
             if(imList != []){
                 
             
-                buildMain(imList, albumIds, all)
+                buildNewest(imList, albumIds, latestAlbumList)
+                buildRecommended(imList, albumIds, latestAlbumList)
              
-                buildAside(imList, albumIds, all)
+                fetch('https://' + window.location.host + '/albums/following/', {
+                    method:"GET",
+                    headers:{
+                     
+                        "Authorization":"Bearer " + localStorage.getItem('token')
+                    },
+                })
+                .then( response => {
+                    console.log(response)
+                    if (response.status == 200) {
+                        
+                
+                        return response;
+                        
+                  }else if(response.status == 401){
+                     
+                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        throw error;
+            
+                  }else {
+             
+                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                        throw error;
+                    }
+                })    
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                    followingAlbumList = response.albumList
+                    var cack =  12 - followingAlbumList.length
+                    if (followingAlbumList.length < 12){
+                        for(i=0;i<cack;i++){
+                            console.log(i)
+                            followingAlbumList.push(latestAlbumList[i])
+                        }
+                    }
+            
+                    var imList = []
+                    var albumIds = []
+                    for(i=0;i<followingAlbumList.length;i++){
+                        imList.push(followingAlbumList[i].images[0].filename);
+                        albumIds.push(followingAlbumList[i]._id)
+                    }
+
+                    buildFollowing(imList, albumIds, followingAlbumList)
+                     
+                    
+                })
         
       
           
@@ -49,7 +97,7 @@
             
 
             
-            return
+            
         }
     };
     
@@ -58,12 +106,13 @@
     
 }
 
-function buildCard(imList, albumIds, all){
-    var imgId = all.albumList[ind].images[0]._id
+function buildCard(imList, albumIds, albumList, ind, category){
+    console.log(albumList)
+    var imgId = albumList[ind].images[0]._id
     var nextId = null;
     var albumId = albumIds[ind]
-    if(all.albumList[ind].images.length > 1){
-       nextId = all.albumList[ind].images[1]._id
+    if(albumList[ind].images.length > 1){
+       nextId = albumList[ind].images[1]._id
     }
     $imDiv = $(document.createElement('div')).addClass('imDivRec imDiv')
             
@@ -72,12 +121,13 @@ function buildCard(imList, albumIds, all){
 
     $im = $(document.createElement('img')).attr('src', imList[ind]).addClass("im" + ind.toString())
   
-
+    $carouselDiv = $(document.createElement('div')).addClass('carousel-main ' + category).attr('id', 'carousel-main-' + category + ind)
     $cardDiv = $(document.createElement('div')).addClass('cardDiv')
     $bottomCont = $(document.createElement('div')).addClass('bottomCont')
-    $title = $(document.createElement('h4')).addClass('cardTitle').html(all.albumList[ind].title)
+    $title = $(document.createElement('h4')).addClass('cardTitle').html(albumList[ind].title)
     $authorCont = $(document.createElement('div')).addClass('authorCont');
-    $author = $(document.createElement('p')).addClass('cardAuthor').html(all.albumList[ind].author.username)
+    
+    $author = $(document.createElement('p')).addClass('cardAuthor').html(albumList[ind].author.username)
     
     
     $link.append($im)
@@ -88,85 +138,85 @@ function buildCard(imList, albumIds, all){
 
     $cardDiv.append($imDiv)
     $cardDiv.append($bottomCont)
+    $carouselDiv.append($cardDiv)
 
-    return $cardDiv
+    return $carouselDiv
 }
 
-function buildAside(imList, albumIds, all){
+
+function buildNewest(imList, albumIds, albumList){
     var exit = false;
+
     $allDiv = $(document.createElement('div')).addClass('allDiv')
-    for(i=0;i<4;i++){
+    
+    $newestCarousel = $('#newestCarousel');
+    
+    //$recommendedCarousel = $('#recommendedCarousel');
+    //$newestCarousel = $('#newestCarousel');
+    for(i=0;i<12;i++){
+    
+        $cardDiv = buildCard(imList, albumIds, albumList, i, "newest")
+        $allDiv.append($cardDiv)
 
-        $rowDiv = $(document.createElement('div')).addClass('rowDiv')
-        for(j=0;j<1;j++){
-            ind = i*1 + j
-            console.log(ind)
-            if(ind  >= imList.length){
- 
-                $allDiv.append($rowDiv)
-                $('.allContent').append($allDiv)
-        
-                break
-            }
-          
-            $cardDiv = buildCard(imList, albumIds, all)
-            
+       
 
-
-      
-            
-
-          
-            $rowDiv.append($cardDiv)
-            
-            
-        }
-        $allDiv.append($rowDiv)
     
     }
 
-    $('.asideCont').append($allDiv)
+   
+    
+    
+    $newestCarousel.append($allDiv)
+    
+
+    
+    //$recommendedCarousel.append($('#followingCarousel .allDiv').clone())
+    //$newestCarousel.append($('#followingCarousel .allDiv').clone())
+    initMainCarousels("newest")
+    
+
 }
 
-function buildMain(imList, albumIds, all){
+function buildRecommended(imList, albumIds, albumList){
+    $allDiv2 = $(document.createElement('div')).addClass('allDiv')
+    $recommendedCarousel = $('#recommendedCarousel')
+    for(i=0;i<12;i++){
+        $cardDiv2 = buildCard(imList, albumIds, albumList, i, "recommended")
+        $allDiv2.append($cardDiv2)
+    }
+    $recommendedCarousel.append($allDiv2)
+    initMainCarousels("recommended")
+    
+}
+
+function buildFollowing(imList, albumIds, all, index){
     var exit = false;
     console.log(all)
     $allDiv = $(document.createElement('div')).addClass('allDiv')
-    for(i=0;i<4;i++){
-        if(exit){
-            break
-        }
-        $rowDiv = $(document.createElement('div')).addClass('rowDiv')
- 
-        for(j=0;j<3;j++){
-            ind = i*3 + j
-            console.log(ind)
-            if(ind  >= imList.length){
-                $allDiv.append($rowDiv);
-                $('.allContent').append($allDiv)
-                exit = true;
-                break
-            }
-          
-            
-            
-            $cardDiv = buildCard(imList, albumIds, all)
+    $followingCarousel = $('#followingCarousel');
+    //$recommendedCarousel = $('#recommendedCarousel');
+    //$newestCarousel = $('#newestCarousel');
 
-      
-            
-
-          
-            $rowDiv.append($cardDiv)
-            
-            
-        }
-        $allDiv.append($rowDiv)
+    for(i=0;i<12;i++){
+        $cardDiv = buildCard(imList, albumIds, all, i, "following")
+        $allDiv.append($cardDiv)
     
     }
 
-    $('.mainCont').append($allDiv)
+   
+    
+    
+    $followingCarousel.append($allDiv)
+
+    
+    //$recommendedCarousel.append($('#followingCarousel .allDiv').clone())
+    //$newestCarousel.append($('#followingCarousel .allDiv').clone())
+    initMainCarousels("following")
 
 }
+
+
+
 function buildCarousel(imList, albumIds, all){
     
     for(i=0;i<8;i++){
@@ -194,13 +244,13 @@ function buildCarousel(imList, albumIds, all){
     
         
     
-        $title= $(document.createElement('h2')).addClass('cardTitle').html(all.albumList[ind].title)
-        $description= $(document.createElement('p')).addClass('cardDescription').html(all.albumList[ind].description)
-        $author = $(document.createElement('p')).addClass('cardAuthor').html(all.albumList[ind].author.username)
+        $title= $(document.createElement('h2')).addClass('cardTitle').html(albumList[ind].title)
+        $description= $(document.createElement('p')).addClass('cardDescription').html(albumList[ind].description)
+        $author = $(document.createElement('p')).addClass('cardAuthor').html(albumList[ind].author.username)
         
         $authorCont = $(document.createElement('div')).addClass('authorCont')
         $avatarCont =  $(document.createElement('span')).addClass('avatarContainer');
-        $avatarImage = $(document.createElement('img')).attr('src', all.albumList[ind].author.avatarPath)
+        $avatarImage = $(document.createElement('img')).attr('src', albumList[ind].author.avatarPath)
         
     
         $viewAlbumBtn = $(document.createElement('a')).addClass('fancy-button pop-onhover bg-gradient4').attr('href', '/albums/' + albumIds[ind])
@@ -269,5 +319,98 @@ window.onload = () => {
 
     
 }
-    
 
+function initMainCarousels(category){
+   
+
+    for(i=0;i<4;i++){
+        console.log($('#carousel-main' + category +  i.toString()))
+        $('#carousel-main-' + category + i.toString()).addClass("carousel-main-active")
+    }
+    for(i=4;i<8;i++){
+        console.log($('#carousel-main'  + category + i.toString()))
+        $('#carousel-main-' + category + i.toString()).addClass("carousel-main-nextgroup")
+    }
+    
+    $('.carousel-main-' + category + '--prev').hide()
+}
+
+$(document).ready(() => {
+  
+    setEventListeners()
+})
+
+function moveNext(category){
+    $('.carousel-main-' + category + '--prev').show()
+    $('.carousel-main-' +  category + '--next').show()
+    var nextnext = $('.carousel-main-nextgroup.' + category)[0]
+    $(".carousel-main-prevgroup." + category).removeClass('carousel-main-prevgroup')
+    $(".carousel-main-active." + category).removeClass("carousel-main-active").addClass('carousel-main-prevgroup')
+    
+    $('.carousel-main-nextgroup.' + category).removeClass('carousel-main-nextgroup').addClass('carousel-main-active')
+    
+    
+    
+    
+    nextnextvalue = parseInt($(nextnext).attr('id').substr(-1)) + 4
+    console.log(nextnextvalue)
+    if($('#carousel-main-' + category + nextnextvalue.toString()).length != 0){
+        for(i=nextnextvalue;i<nextnextvalue+4;i++){
+            $('#carousel-main-' + category + i.toString()).addClass("carousel-main-nextgroup")
+        }
+    }else{
+        $('.carousel-main-' + category + '--next').hide()
+    }
+}
+
+function movePrev(category){
+    $('.carousel-main-' + category + '--prev').show()
+    $('.carousel-main-'  + category + '--next').show()
+    var prevprev = $('.carousel-main-prevgroup.'  + category )[0]
+    $(".carousel-main-nextgroup."  + category ).removeClass('carousel-main-nextgroup')
+    $('.carousel-main-active.'  + category ).removeClass('carousel-main-active').addClass('carousel-main-nextgroup')
+    $('.carousel-main-prevgroup.'  + category).removeClass('carousel-main-prevgroup').addClass('carousel-main-active')
+    
+    
+    prevprevvalue = parseInt($(prevprev).attr('id').substr(-1)) - 4
+    if($('#carousel-main-'  + category  + prevprevvalue.toString()).length != 0){
+        for(i=prevprevvalue;i<prevprevvalue+4;i++){
+            $('#carousel-main-'  + category + i.toString()).addClass("carousel-main-prevgroup")
+        }
+    }else{
+        $('.carousel-main-' +  category +'--prev').hide()
+    }
+}
+
+function setEventListeners() {
+    var nextFollowing = document.getElementsByClassName('carousel-main-following--next')[0],
+        prevFollowing = document.getElementsByClassName('carousel-main-following--prev')[0],
+        nextNewest = document.getElementsByClassName('carousel-main-newest--next')[0],
+        prevNewest = document.getElementsByClassName('carousel-main-newest--prev')[0];
+        nextRecommended = document.getElementsByClassName('carousel-main-recommended--next')[0],
+        prevRecommended = document.getElementsByClassName('carousel-main-recommended--prev')[0];
+
+    nextFollowing.addEventListener('click', () => {
+        moveNext("following")
+    });
+    prevFollowing.addEventListener('click', () => {
+        movePrev("following")
+    });
+    nextNewest.addEventListener('click', () => {
+        moveNext("newest")
+    });
+    prevNewest.addEventListener('click', () => {
+        movePrev("newest")
+    });
+    nextRecommended.addEventListener('click', () => {
+        moveNext("recommended")
+    });
+    prevRecommended.addEventListener('click', () => {
+        movePrev("recommended")
+    });
+  }
+
+$(document).ready(() => {
+   
+
+})
