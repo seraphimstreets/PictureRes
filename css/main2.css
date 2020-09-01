@@ -122,7 +122,7 @@ main{
     position:relative;
     margin:2% 1%;
     
-    height:20vw;
+
     width:15vw;
     
    
@@ -186,13 +186,15 @@ z-index:0;
     margin-top:2vh;
     font-family: 'Open Sans';
     font-size:1em;
-    margin-bottom:1vh;
+    margin-bottom:3vh;
 }
 
 .cardAuthor{
     font-family:'Open Sans';
     color:rgba(0,0,0,0.8);
     font-size:0.8em;
+    display:flex;
+    align-items: center;
   
 }
 

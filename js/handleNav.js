@@ -154,6 +154,7 @@ $('#loginBtn').attr('href', 'https://' + window.location.host + '/login')
             destroyAvatar()
             localStorage.setItem('token', null);
             localStorage.setItem('visitor',null)
+            localStorage.setItem('loginTruth',null)
             location.reload();
         });
       

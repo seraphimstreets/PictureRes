@@ -20,6 +20,7 @@ const imageRouter = require('./routes/imageRouter');
 const userRouter = require('./routes/users');
 const uploadRouter = require('./routes/uploadRouter');
 const albumRouter = require('./routes/albumRouter');
+const adminRouter = require('./routes/admin');
 const followerRouter = require("./routes/followerRouter");
 const passport = require('passport');
 var cookieParser = require('cookie-parser')
@@ -66,6 +67,7 @@ app.use('/images', imageRouter);
 app.use('/albums', albumRouter);
 app.use('/followers', followerRouter);
 app.use('/users', userRouter);
+app.use('/admin', adminRouter)
 app.use('/upload', uploadRouter);
 
 app.use(function(req, res, next) {

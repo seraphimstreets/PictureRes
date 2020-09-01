@@ -46,8 +46,8 @@ $('.carousel__button--prev').hide()
     var next = document.getElementsByClassName('carousel__button--next')[0],
         prev = document.getElementsByClassName('carousel__button--prev')[0];
 
-    next.addEventListener('click', moveNext);
-    prev.addEventListener('click', movePrev);
+    next.addEventListener('click', moveNextTop);
+    prev.addEventListener('click', movePrevTop);
   }
 
   // Disable interaction by setting 'moving' to true for the same duration as our transition (0.5s = 500ms)
@@ -130,7 +130,7 @@ $('.carousel__button--prev').hide()
   
 
   // Next navigation handler
-  function moveNext() {
+  function moveNextTop() {
 
     // Check if moving
     if (!moving) {
@@ -148,7 +148,7 @@ $('.carousel__button--prev').hide()
   }
 
   // Previous navigation handler
-  function movePrev() {
+  function movePrevTop() {
 
     // Check if moving
     if (!moving) {

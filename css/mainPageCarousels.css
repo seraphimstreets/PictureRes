@@ -10,6 +10,8 @@
     
 }
 
+
+
 .carousel-main{
     opacity:0;
     transition: z-index .5s, opacity 0.5s, scale .5s, transform 1s;
@@ -40,7 +42,7 @@
     transform:translateX(0%);
     opacity:1;
    position:relative;
-    margin:1% 1%;
+    margin:2% 1%;
 }
 
 .carousel-main-following--prev,
@@ -58,7 +60,7 @@
   color:rgba(0,0,0,0.2);
 
   cursor: pointer; 
-  z-index: 1001; /* Sit on top of everything */
+  z-index: 10; /* Sit on top of everything */
 
   
 /*  opacity: 0;  Hide buttons until carousel is initialised 
@@ -75,4 +77,29 @@
 
 .carousel-main-following--next, .carousel-main-newest--next, .carousel-main-recommended--next {
   right:10vw;
+}
+
+.authorAvatarCont{
+    display:inline-block;
+    overflow: hidden;
+    border-radius:50%; 
+    width:1.6vw;
+    height:1.6vw;
+ 
+}
+
+.authorAvatar{
+    width:100%;
+    display:block;
+}
+
+.authorCont{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.cardAuthor{
+    margin-left:1vw;
 }

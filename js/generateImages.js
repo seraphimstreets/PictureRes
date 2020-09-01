@@ -35,58 +35,65 @@ var latestAlbumList;
             
                 buildNewest(imList, albumIds, latestAlbumList)
                 buildRecommended(imList, albumIds, latestAlbumList)
-             
-                fetch('https://' + window.location.host + '/albums/following/', {
-                    method:"GET",
-                    headers:{
-                     
-                        "Authorization":"Bearer " + localStorage.getItem('token')
-                    },
-                })
-                .then( response => {
-                    console.log(response)
-                    if (response.status == 200) {
-                        
+                buildCarousel(imList.slice(0,8), albumIds.slice(0,8), latestAlbumList)
                 
-                        return response;
+                if(localStorage.getItem('loginTruth') == 'true'){
+                    $('.following').show()
+                    fetch('https://' + window.location.host + '/albums/following/', {
+                        method:"GET",
+                        headers:{
                         
-                  }else if(response.status == 401){
-                     
-                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                        throw error;
-            
-                  }else {
-             
-                        var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                        throw error;
-                    }
-                })    
-                .then(response => response.json())
-                .then(response => {
-                    console.log(response)
-                    followingAlbumList = response.albumList
-                    var cack =  12 - followingAlbumList.length
-                    if (followingAlbumList.length < 12){
-                        for(i=0;i<cack;i++){
-                            console.log(i)
-                            followingAlbumList.push(latestAlbumList[i])
-                        }
-                    }
-            
-                    var imList = []
-                    var albumIds = []
-                    for(i=0;i<followingAlbumList.length;i++){
-                        imList.push(followingAlbumList[i].images[0].filename);
-                        albumIds.push(followingAlbumList[i]._id)
-                    }
-
-                    buildFollowing(imList, albumIds, followingAlbumList)
-                     
+                            "Authorization":"Bearer " + localStorage.getItem('token')
+                        },
+                    })
+                    .then( response => {
+                        console.log(response)
+                        if (response.status == 200) {
+                            
                     
-                })
+                            return response;
+                            
+                    }else if(response.status == 401){
+                        
+                            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                            throw error;
+                
+                    }else {
+                
+                            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                            throw error;
+                        }
+                    })    
+                    .then(response => response.json())
+                    .then(response => {
+                        console.log(response)
+                        followingAlbumList = response.albumList
+                        var cack =  12 - followingAlbumList.length
+                        if (followingAlbumList.length < 12){
+                            for(i=0;i<cack;i++){
+                                console.log(i)
+                                followingAlbumList.push(latestAlbumList[i])
+                            }
+                        }
+                
+                        var imList = []
+                        var albumIds = []
+                        for(i=0;i<followingAlbumList.length;i++){
+                            imList.push(followingAlbumList[i].images[0].filename);
+                            albumIds.push(followingAlbumList[i]._id)
+                        }
+
+                        buildFollowing(imList, albumIds, followingAlbumList)
+                        
+                        
+                    })
         
-      
-          
+                }else{
+                    $('.following').hide()
+                }
+                console.log('WHYY')
+                setEventListenersOthers()
+                
           
                 
             }else{
@@ -126,15 +133,19 @@ function buildCard(imList, albumIds, albumList, ind, category){
     $bottomCont = $(document.createElement('div')).addClass('bottomCont')
     $title = $(document.createElement('h4')).addClass('cardTitle').html(albumList[ind].title)
     $authorCont = $(document.createElement('div')).addClass('authorCont');
-    
+    $authorAvatarCont = $(document.createElement('div')).addClass('authorAvatarCont')
+    $authorAvatar = $(document.createElement('img')).addClass('authorAvatar').attr('src', albumList[ind].author.avatarPath)
     $author = $(document.createElement('p')).addClass('cardAuthor').html(albumList[ind].author.username)
     
-    
+    $authorAvatarCont.append($authorAvatar)
+    $authorCont.append($authorAvatarCont)
+    $authorCont.append($author)
+
     $link.append($im)
     $imDiv.append($link)
 
     $bottomCont.append($title)
-    $bottomCont.append($author)
+    $bottomCont.append($authorCont)
 
     $cardDiv.append($imDiv)
     $cardDiv.append($bottomCont)
@@ -217,7 +228,7 @@ function buildFollowing(imList, albumIds, all, index){
 
 
 
-function buildCarousel(imList, albumIds, all){
+function buildCarousel(imList, albumIds, albumList){
     
     for(i=0;i<8;i++){
                     	
@@ -324,23 +335,54 @@ function initMainCarousels(category){
    
 
     for(i=0;i<4;i++){
-        console.log($('#carousel-main' + category +  i.toString()))
         $('#carousel-main-' + category + i.toString()).addClass("carousel-main-active")
     }
     for(i=4;i<8;i++){
-        console.log($('#carousel-main'  + category + i.toString()))
+        
         $('#carousel-main-' + category + i.toString()).addClass("carousel-main-nextgroup")
     }
     
     $('.carousel-main-' + category + '--prev').hide()
 }
 
+function setEventListenersOthers() {
+    var nextFollowing = document.getElementsByClassName('carousel-main-following--next')[0],
+        prevFollowing = document.getElementsByClassName('carousel-main-following--prev')[0],
+        nextNewest = document.getElementsByClassName('carousel-main-newest--next')[0],
+        prevNewest = document.getElementsByClassName('carousel-main-newest--prev')[0];
+        nextRecommended = document.getElementsByClassName('carousel-main-recommended--next')[0],
+        prevRecommended = document.getElementsByClassName('carousel-main-recommended--prev')[0];
+
+    console.log('???')
+
+    nextFollowing.addEventListener('click', () => {
+        moveNext("following")
+    });
+    prevFollowing.addEventListener('click', () => {
+        movePrev("following")
+    });
+    nextNewest.addEventListener('click', () => {
+        moveNext("newest")
+    });
+    prevNewest.addEventListener('click', () => {
+        movePrev("newest")
+    });
+    nextRecommended.addEventListener('click', () => {
+        moveNext("recommended")
+    });
+    prevRecommended.addEventListener('click', () => {
+        movePrev("recommended")
+    });
+  }
+
 $(document).ready(() => {
-  
-    setEventListeners()
+   
+    
 })
 
+
 function moveNext(category){
+    console.log('BHERE')
     $('.carousel-main-' + category + '--prev').show()
     $('.carousel-main-' +  category + '--next').show()
     var nextnext = $('.carousel-main-nextgroup.' + category)[0]
@@ -382,35 +424,4 @@ function movePrev(category){
     }
 }
 
-function setEventListeners() {
-    var nextFollowing = document.getElementsByClassName('carousel-main-following--next')[0],
-        prevFollowing = document.getElementsByClassName('carousel-main-following--prev')[0],
-        nextNewest = document.getElementsByClassName('carousel-main-newest--next')[0],
-        prevNewest = document.getElementsByClassName('carousel-main-newest--prev')[0];
-        nextRecommended = document.getElementsByClassName('carousel-main-recommended--next')[0],
-        prevRecommended = document.getElementsByClassName('carousel-main-recommended--prev')[0];
 
-    nextFollowing.addEventListener('click', () => {
-        moveNext("following")
-    });
-    prevFollowing.addEventListener('click', () => {
-        movePrev("following")
-    });
-    nextNewest.addEventListener('click', () => {
-        moveNext("newest")
-    });
-    prevNewest.addEventListener('click', () => {
-        movePrev("newest")
-    });
-    nextRecommended.addEventListener('click', () => {
-        moveNext("recommended")
-    });
-    prevRecommended.addEventListener('click', () => {
-        movePrev("recommended")
-    });
-  }
-
-$(document).ready(() => {
-   
-
-})
