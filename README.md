@@ -10,24 +10,36 @@ PictureRes was designed as a ubiquitous hub for art enthusiasts to upload their 
 
 Rotating 3D Image Carousel (created by me)
 
+
 ![Rotating 3D Carousel](https://i.imgur.com/h0SDenq.gif)
+
 
 Upload an album of several images at once. (Rearrangeable) The application creates an album in the same order that the images were arranged. 
 
+
 ![Upload](https://i.imgur.com/j54y857.gif)
+
 
 Authenticate through third-party providers 
 
+
 ![Authenticate](https://i.imgur.com/mRwJj4X.gif)
+
 
 Social media interface inspired by Facebook (infinite nested comments) 
 
+
 ![Comments1](https://i.imgur.com/wa05EoL.gif)
+
 
 Delete albums
 
+
 ![Delete Albums](https://i.imgur.com/ySiM7q6.gif)
+
 
 Follow other users, allowing you quick access to their albums on the front page
 
+
 ![Follow](https://i.imgur.com/DMtXOvU.gif)
+
