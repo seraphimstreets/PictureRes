@@ -30,4 +30,4 @@ Delete albums
 
 Follow other users, allowing you quick access to their albums on the front page
 
-
+![Follow](https://i.imgur.com/DMtXOvU.gif)
