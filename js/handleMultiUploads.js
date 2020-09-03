@@ -6,10 +6,10 @@ $(document).ready(() => {
 
     $(document).on('click', '.closeImageCont', (e) => {
         var count = $(e.target).attr('data-counter')
-        console.log(count)
+        
         delete globalFileObject[count]
         delete globalDescriptionObject[count]
-        console.log(globalFileObject)
+        
         $('.previewImageCont.' + count).remove()
 
         reworkOrder()
@@ -17,7 +17,7 @@ $(document).ready(() => {
 
     $(document).on('click', '.editImageCont', (e) => {
         var count = $(e.target).attr('data-counter')
-        console.log($('#imageDescriptionModal' + count).length)
+       
         if ( $('#imageDescriptionModal' + count).length){
        
             $('#imageDescriptionModal' + count).show()
@@ -40,7 +40,7 @@ $(document).ready(() => {
     $(document).on('click', '.imageDescriptionDone', (e) => {
         var count = $(e.target).attr('data-counter')
         globalDescriptionObject[count.toString()] = $('#imageDescription' + count).val()
-        console.log(globalDescriptionObject);
+        
         $('.mod').hide()
         $('.modalOverlay').hide()
        
@@ -54,7 +54,7 @@ function reworkOrder(){
     for(var i=0;i<allIms.length;i++){
         newOrder.push($(allIms[i]).attr('data-counter'))
     }
-    console.log(newOrder)
+    
 }
 
 window.onload = function(){
@@ -81,7 +81,7 @@ window.onload = function(){
                         globalFileObject[globalFileCounter.toString()] = e.target.file
                         globalDescriptionObject[globalFileCounter.toString()] = ""
                 
-                        console.log(globalFileObject)
+                        
                         
                         
                         $previewImageCont = $(document.createElement('div')).addClass('previewImageCont ' + globalFileCounter.toString())
@@ -123,12 +123,11 @@ function submitAlbum(){
     var newFileList = Object.values(globalFileObject);
     var newDescriptionList = Object.values(globalDescriptionObject);
 
-    console.log(globalFileObject)
-    console.log(globalDescriptionObject)
+    
     var data = new FormData();
     
     for(var i=0;i<newOrder.length;i++){
-        console.log(newOrder[i])
+        
         data.append('file',globalFileObject[newOrder[i]])
     }
 
@@ -137,7 +136,7 @@ function submitAlbum(){
     }
 
     var allTags = $('#uploadTags').attr('data-value').split(',')
-    console.log(typeof($('#uploadTags').attr('data-value')))
+    
 
     data.append('albumTitle', $('#uploadTitle').val())
     data.append('albumDescription', $('#uploadDescription').val())
@@ -162,7 +161,7 @@ function submitAlbum(){
         body:data
     })
     .then( response => {
-        console.log(response)
+        
         if (response.status == 200) {
             
             $('#success-header').html('Success');

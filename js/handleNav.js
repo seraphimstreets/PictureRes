@@ -42,8 +42,7 @@ function buildAvatar(response){
         
 
        
-        $('.profileName').html(response.username)
-        
+       
         $('.profileName').html(response.username)
 
         $("#my-gallery").attr('href', '/home/' + response._id)
@@ -69,9 +68,19 @@ $(document).ready(function(){
         clearFileInput()
     })
 
+    $('.search-bar-icon').click(() => {
+        term = $('.search-bar').val()
+        
+        if (!term){
+            term = "e"
+        }
+        
+        window.location.replace("https://" + window.location.host + "/search/?term=" + term + "&count=0")
+    })
+
    
-$('#signUpBtn').attr('href', 'https://' + window.location.host + '/signup')
-$('#loginBtn').attr('href', 'https://' + window.location.host + '/login')
+    $('#signUpBtn').attr('href', 'https://' + window.location.host + '/signup')
+    $('#loginBtn').attr('href', 'https://' + window.location.host + '/login')
    var dpcolor = "#1f1c2e"
    var lcolor = '#d4d4d4'
    var origcolor = '#494368'
@@ -119,7 +128,7 @@ $('#loginBtn').attr('href', 'https://' + window.location.host + '/login')
         $('.mod').hide()
         $('.modalOverlay').hide()
     })
-    $('.profileName').html(user.username)
+   
     
     
     $('.okModal').click(() => {

@@ -286,3 +286,7 @@ padding:5vh 2vw;
 .carousel__item.active p{
     opacity:1;
 }
+
+.following{
+  margin-top:3%;
+}

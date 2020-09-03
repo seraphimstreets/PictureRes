@@ -186,9 +186,9 @@ function nonUserHandler(){
 
 
 function checkId(list, id){
-    console.log(list)
+    
     if(list == []){
-	return true
+	    return true
     }
     for(var i=0;i<list.length;i++){
         if (list[i] == id) return false
@@ -219,7 +219,7 @@ function getTimeString(elapsed){
 
 function handleLike(){
     var loggedin  = $('.descriptionRight').attr('data-loggedin')
-    console.log(loggedin)
+    
     if (loggedin == 'false'){
         window.location.replace(window.location.href)
         return
@@ -361,7 +361,7 @@ function submitSubcomment(e, imgId){
 function updateCommentLike(e){
     
     var loggedin  = $('.descriptionRight').attr('data-loggedin')
-    console.log(loggedin)
+    
     if (loggedin == 'false'){
         window.location.replace('https://' + window.location.host)
         return
@@ -419,7 +419,7 @@ function updateCommentLike(e){
 
         if(newcount > 0){
             var truth = $(e.target).attr('data-showlikecount')
-            console.log(truth)
+            
             if (truth == 'false'){
                 var $dotSeparator0 = $(document.createElement('span')).addClass("comment-cta-item sep-0 "  + comId).html("·")
                 var $commentLikecount = $(document.createElement('span')).addClass("comment-cta-item comment-likecount " + comId).html(newcount)
@@ -465,7 +465,7 @@ function buildComments(comments, imgId){
         comments.forEach(comment => {
            
             var created = new Date(comment.createdAt)
-            console.log(Date.now())
+            
             var elapsed = Date.now() - created.getTime() 
             elapsed = Math.round(elapsed/1000)
             
@@ -519,7 +519,7 @@ function buildComments(comments, imgId){
             $commentCTACont.append($commentLike)
             
             if(comment.liked.length > 0){
-                console.log('log')
+                
                 var $dotSeparator0 = $(document.createElement('span')).addClass("comment-cta-item sep-0 " + comment._id).html("·")
                 var $commentLikecount = $(document.createElement('span')).addClass("comment-cta-item comment-likecount " + comment._id).html(comment.liked.length)
                 $commentCTACont.append($dotSeparator0)
@@ -565,17 +565,17 @@ function buildSubcomments(comments, comId, imgId){
     try{
         $('.higherSCommentCont.'+comId).empty()
     }catch{
-        console.log('MMM')
+        
     }
     
-    console.log(comments)
+    
     
    
     if(comments != []){
         comments.forEach(comment => {
            
             var created = new Date(comment.createdAt)
-            console.log(Date.now())
+            
             var elapsed = Date.now() - created.getTime() 
             elapsed = Math.round(elapsed/1000)
             
@@ -628,7 +628,7 @@ function buildSubcomments(comments, comId, imgId){
 
             $commentCTACont.append($commentLike)
             if(comment.liked.length > 0){
-                console.log('log')
+                
                 var $dotSeparator0 = $(document.createElement('span')).addClass("comment-cta-item sep-0 " + comment._id).html("·")
                 var $commentLikecount = $(document.createElement('span')).addClass("comment-cta-item comment-likecount " + comment._id).html(comment.liked.length)
                 $commentCTACont.append($dotSeparator0)
@@ -674,7 +674,7 @@ function buildSubcomments(comments, comId, imgId){
 
 function buildSubcommenter(comId){
     var parentComment =  $('.commentCTACont.' + comId)
-    console.log(parentComment)
+    
 
     var $higherSCCont = $(document.createElement('div')).addClass("higherSCCont " + comId);
     var $newCommentCont = $(document.createElement('div')).addClass("newCommentCont")
@@ -707,7 +707,7 @@ function buildSubcommenter(comId){
 
 function buildUserAvatar(user){
     uavs =  document.getElementsByClassName("userAvatar")
-    console.log(uavs.length)
+    
     for(i=0;i<uavs.length;i++){
         if (user.avatarPath){
           
@@ -856,7 +856,7 @@ function fetchComments(imgId){
             },error => {throw error;})    
         .then(response => response.json())
         .then(response => {
-            console.log(response)
+            
             buildComments(response.comments, imgId)
         })
         .catch(err => console.log(err))
@@ -907,7 +907,7 @@ function fetchImage(imgId,skeletonTruth=false, overlayTruth=false){
 
 
 function fetchCommentReplies(e, built, imgId){
-    console.log(e.target)
+    
     var comId = e.target.getAttribute('data-id');
 
     fetch('https://' + window.location.host +'/images/' + imgId + '/' + comId + '/subcomment', {
@@ -936,7 +936,7 @@ function fetchCommentReplies(e, built, imgId){
             subcomTruth = $higherCTACont.attr('data-sc')
             subcommenterTruth = $higherCTACont.attr('data-scer')
           
-            console.log(subcommenterTruth)
+            
             if (subcomTruth == 'false'){
                 $('.' + comId + '.repliesIndicatorCont' ).css('display','none')
                 buildSubcomments(response.subcomments, comId, imgId)

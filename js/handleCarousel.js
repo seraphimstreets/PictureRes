@@ -11,7 +11,7 @@ moving = true;
 function setInitialClasses() {
     items = document.getElementsByClassName(itemClassName),
     totalItems = items.length
-    console.log(items)
+    
     prev = totalItems - 1
     prevprev = totalItems -2
     next = 1
@@ -73,7 +73,7 @@ $('.carousel__button--prev').hide()
     items[nextnext].className = itemClassName;
   
     
-    console.log(next)
+    
       // Preemptively set variables for the current next and previous slide, as well as the potential next or previous slide.
       if(mov == 'prev'){
         prevprev -= 1,
@@ -113,7 +113,7 @@ $('.carousel__button--prev').hide()
     }else if(next > (totalItems - 1)){
         next = 0
     }
-    console.log(next)
+    
         // Now we've worked out where we are and where we're going, by adding and removing classes, we'll be triggering the carousel's transitions.
 
      

@@ -4,7 +4,7 @@ $(document).ready( () => {
         $('.followBtn').hide()
     }
     getVisitorInfo()
-    console.log(user)
+  
     $('.profileUsername').html(user.username)
     getUserAlbumsFromServer(user._id)
 
@@ -102,10 +102,10 @@ function getVisitorInfo(){
     .then(response => response.json())
     .then(response => {
         globalVisitor = response.user
-        console.log(globalVisitor)
-        console.log(user.followers.includes(globalVisitor._id))
+   
+      
         if (user.followers.includes(globalVisitor._id) ){
-            console.log("???")
+            
             $('.followBtn, .followBtn span').attr('data-following', true)
             changeFollowBtn(true)
         }
@@ -156,7 +156,7 @@ function getUserAlbumsFromServer(userId){
             imList.push(all.albumList[i].images[0].filename);
             albumIds.push(all.albumList[i]._id)
         }
-        console.log(imList)
+        
 
 
         $allDiv = $(document.createElement('div')).addClass('allDiv')
@@ -164,7 +164,7 @@ function getUserAlbumsFromServer(userId){
             $rowDiv = $(document.createElement('div')).addClass('rowDiv')
             for(j=0;j<6;j++){
                 ind = i*6 + j
-                console.log(ind)
+                
                 if(ind  >= imList.length){
                     $allDiv.append($rowDiv)
                     $('.userGallery').append($allDiv)
@@ -229,7 +229,7 @@ function getUserAlbumsFromServer(userId){
 
 function deleteAlbums(){
     var $checkedAlbums = $('.checkbox:checked')  
-    console.log($checkedAlbums)
+    
     var deleteIds = []  
     var item;
     for(var i=0;i<$checkedAlbums.length;i++){
@@ -237,7 +237,7 @@ function deleteAlbums(){
         deleteIds.push($(item).attr('data-id'))
     }
 
-    console.log(deleteIds)
+   
 
     fetch('../albums/', {
         method:'DELETE',

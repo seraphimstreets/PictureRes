@@ -22,6 +22,7 @@ const uploadRouter = require('./routes/uploadRouter');
 const albumRouter = require('./routes/albumRouter');
 const adminRouter = require('./routes/admin');
 const followerRouter = require("./routes/followerRouter");
+const searchRouter = require("./routes/searchRouter");
 const passport = require('passport');
 var cookieParser = require('cookie-parser')
 const url = 'mongodb://localhost:27017/pictureres';
@@ -53,6 +54,9 @@ app.use('/albums/:albumId/', express.static(path.join(__dirname, '/assets/images
 app.use('/home', express.static(path.join(__dirname, '/')));
 app.use('/home', express.static(path.join(__dirname, '/assets/images/')));
 app.use('/uploadImages', express.static(path.join(__dirname, '/')));
+
+app.use('/search/', express.static(path.join(__dirname, '/')));
+app.use('/search/', express.static(path.join(__dirname, '/assets/images/')));
 app.use(cookieParser());
 
 app.use(session({ secret: config.secretKey}));
@@ -67,8 +71,10 @@ app.use('/images', imageRouter);
 app.use('/albums', albumRouter);
 app.use('/followers', followerRouter);
 app.use('/users', userRouter);
-app.use('/admin', adminRouter)
+app.use('/admin', adminRouter);
 app.use('/upload', uploadRouter);
+app.use('/search', searchRouter);
+
 
 app.use(function(req, res, next) {
     next(createError(404));

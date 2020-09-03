@@ -43,7 +43,7 @@ albumRouter.route('/')
  
     if (req.query.latest){
         Albums.countDocuments({}, (err, count) => {
-            console.log(count)
+            
             Albums.find({}).sort({'createdAt':-1}).limit(12)
             .populate('images')
             .populate('author')
@@ -98,7 +98,7 @@ albumRouter.route('/')
     
 })
 .delete(cors.cors, authenticate.verifyUser,(req,res,next)=>{
-    console.log(__dirname)
+   
     albumIds = req.body.ids;
     
     req.body.ids.forEach(id => {
@@ -106,13 +106,12 @@ albumRouter.route('/')
         .then(album => {
            
             album.images.forEach(imageId => {
-                console.log(imageId)
+                
                 Images.findByIdAndDelete(imageId)
                 .then(resp => deleteFile(__dirname + '/../assets/images/' + resp.filename))
 
             })
-            console.log('HERE')
-
+            
             Users.findById(req.user._id)
             .then(user => {
                 user.albums.pull(id)
@@ -186,7 +185,7 @@ albumRouter.route('/following/')
         path:'albums.images',
         model:'Image'
     }
-})
+    })
     .then(author => {
         var albumList = []
         count = 0 
@@ -206,11 +205,7 @@ albumRouter.route('/following/')
            }
               
         }
-        console.log(albumList)
-        res.statusCode = 200;
-        res.setHeader('Content-Type' , 'application/json' );
 
-        res.json({'albumList':albumList});
     })
  
 })
@@ -223,15 +218,15 @@ albumRouter.route('/:albumId/')
     .findById(req.params.albumId)
     .populate('images')
     .then((album) => {
-        
+            console.log('AHFHAHFAHA')
+            console.log(album)
             album_length = album.images.length
             if(req.query.page){
                 var current = parseInt(req.query.page)
             }else{
                 var current = 0
             }
-            console.log(album_length)
-            console.log(current)
+     
 
             var img = album.images[current]
         
@@ -251,7 +246,8 @@ albumRouter.route('/:albumId/')
                 var origPage = req.query.origPage 
             }
 
-            console.log(next_id)
+           
+           
        
             res.statusCode = 200;
             res.setHeader('Content-Type' , 'text/html' );
@@ -267,9 +263,10 @@ albumRouter.route('/:albumId/:imageId')
     .findOne({'_id':req.params.albumId})
     
     .then((album) => {
-        console.log(album)
+        
         if(album != null){
-                    
+            console.log('HERE')
+            console.log(req.params.imageId)
             Comments.find({baseImage:req.params.imageId})
             .then((coms) => {
                 res.statusCode = 200;
@@ -304,7 +301,7 @@ albumRouter.route('/imFind/')
     .populate('comments')
 
     .then((img) => {
-            console.log(img)
+            
             res.statusCode = 200;
             res.setHeader('Content-Type' , 'text/html' );
             res.render('imgDisplay.ejs', {img:JSON.stringify(img)})
@@ -315,7 +312,7 @@ albumRouter.route('/:imageId/like')
 .put(cors.cors, authenticate.verifyUser, (req,res,next)=>{
       Images.findById(req.params.imageId, (err, img) => {
         if (err){
-            console.log('AAAA')
+            
             return next(err)
         }else{
             var likedUsers = img.toObject().liked
@@ -323,7 +320,7 @@ albumRouter.route('/:imageId/like')
                 Users.findById(req.user._id)
                 .then(user => {
                     if (!user){
-                        console.log('BBBB')
+                   
                         return next(err)
 
                     }else{
@@ -338,7 +335,7 @@ albumRouter.route('/:imageId/like')
                             res.setHeader('Content-Type' , 'application/json' );
                             res.json({success:true, statusMessage:'Successfully liked!', liked:true})
                         }else{
-                            console.log('NNNN')
+                            
                             res.statusCode = 200;
                             res.setHeader('Content-Type' , 'application/json' );
                             res.json({success:false , statusMessage:'Already liked!' })
@@ -347,7 +344,7 @@ albumRouter.route('/:imageId/like')
                 })
                 
             }else{
-                console.log('MMMM')
+                
                 res.statusCode = 200;
                 res.setHeader('Content-Type' , 'application/json' );
                 res.json({success:false , statusMessage:'Already liked!' })
@@ -423,8 +420,7 @@ albumRouter.route('/:imageId/comments')
 .post(cors.cors, authenticate.verifyUser, (req,res,next)=>{
     Comments.create({author:req.user._id, content:req.body.commentBody, baseImage:req.params.imageId})
     .then(comment => {
-        console.log(comment)
-
+        
         Images.findById(req.params.imageId, (err, img) => {
             if (err){
               
@@ -464,11 +460,11 @@ albumRouter.route('/:imageId/:commentId/subcomment')
 .post(cors.cors, authenticate.verifyUser, (req, res, next) => {
     Comments.create({author:req.user._id, content:req.body.commentBody, baseImage:req.params.imageId})
     .then(subcomment => {
-        console.log(subcomment)
+      
 
         Comments.findById(req.params.commentId, (err, com) => {
             if (err){
-                console.log('AAAA')
+              
                 return next(err)
             }else{
                 com.subcomments.push(mongoose.Types.ObjectId(subcomment._id))
