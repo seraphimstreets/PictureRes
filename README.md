@@ -18,10 +18,16 @@ Upload an album of several images at once. (Rearrangeable) The application creat
 
 Authenticate through third-party providers 
 
+![Authenticate](https://i.imgur.com/mRwJj4X.gif)
+
 Social media interface inspired by Facebook (infinite nested comments) 
 
 ![Comments1](https://i.imgur.com/wa05EoL.gif)
 
 Delete albums
 
+![Delete Albums](https://i.imgur.com/ySiM7q6.gif)
+
 Follow other users, allowing you quick access to their albums on the front page
+
+
