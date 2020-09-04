@@ -8,7 +8,7 @@ PictureRes was designed as a ubiquitous hub for art enthusiasts to upload their 
 
 I started this project as a challenge to  myself to recreate such sites from scratch without guidance, as I had found no tutorials online on how to do so. As I engaged with the project, I quickly discovered why as I navigated the hidden complexities with regards to data modelling/validation, 3rd party authentication and frontend presentation. 
 
-Currently, I am satisfied with the current result although there is still plenty of room to incorporate additional functionality. In contrast to the aforementioned websites which have a team of dedicated software devlopers behind them, this is a single-person project developed on my free time on weekends, and I'm proud to have been able to create a highly interactive site with decent aesthetics. 
+Currently, I am satisfied with the current result although there is still plenty of room to incorporate additional functionality. In contrast to the aforementioned websites which have a team of dedicated software developers behind them, this is a single-person project developed on my free time on weekends, and I'm proud to have been able to create a highly interactive site with decent aesthetics. 
 
 # Functionality
 
